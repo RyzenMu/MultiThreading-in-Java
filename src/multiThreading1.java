@@ -1,4 +1,4 @@
-class Hi extends Thread{
+class Hi implements Runnable{
     public void run() {
         for(int i=1; i <= 5;i++) {
             System.out.println("Hi" + i);
@@ -7,7 +7,7 @@ class Hi extends Thread{
     }
 }
 
-class Hello extends Thread{
+class Hello implements Runnable{
     public void run() {
         for (int i = 1; i <= 5; i++) {
             System.out.println("Hello" + i);
@@ -20,10 +20,11 @@ public class multiThreading1 {
     public static void main(String[] args) {
         Hi hi = new Hi();
         Hello hello = new Hello();
-      
-        hi.start();
+        Thread t1 = new Thread(hi);
+        Thread t2 = new Thread(hello);
+        t1.start();
         try{Thread.sleep(1000);}catch(Exception e){}
-        hello.start();
+        t2.start();
         
     }    
 }
